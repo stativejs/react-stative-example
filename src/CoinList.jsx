@@ -1,6 +1,6 @@
 import React from 'react';
-import subscribeTo from 'react-stative';
 import { Row, Col, Card } from 'antd';
+import subscribeTo from 'react-stative';
 import coinService from './services/CoinService';
 
 class CoinList extends React.Component {

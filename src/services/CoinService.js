@@ -6,7 +6,6 @@ class CoinService {
     state.set('loading', true);
     const coins = (await axios.get('https://api.coinpaprika.com/v1/coins'))
       .data;
-    console.log(coins);
     state.set('coins', coins.slice(0, 500));
     state.set('loading', false);
   }
