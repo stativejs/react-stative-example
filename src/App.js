@@ -1,26 +1,44 @@
 import React from 'react';
-import logo from './logo.svg';
+import subscribeTo from 'react-stative';
+import { Layout, Spin } from 'antd';
 import './App.css';
+import CoinList from './CoinList';
+import SelectedCoin from './SelectedCoin';
+import coinService from './services/CoinService';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const { Header, Footer, Content } = Layout;
+
+class App extends React.Component {
+  async componentDidMount() {
+    await coinService.getCoins();
+  }
+
+  componentWillUpdate() {
+    console.log('bbbbbbbbbbbb');
+  }
+
+  render() {
+    console.log(this);
+
+    return (
+      <Spin spinning={true}>
+        {/* <Layout>
+          <Header style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
+            <h1>Coins</h1>
+          </Header>
+          <Content style={{ padding: '0 50px', marginTop: 64 }}>
+            <div style={{ padding: 24, minHeight: 380 }}>
+              <SelectedCoin />
+              <CoinList />
+            </div>
+          </Content>
+          <Footer style={{ textAlign: 'center' }}>
+            React Stative Example App ©2019 Created by Alan Castro
+          </Footer>
+        </Layout> */}
+      </Spin>
+    );
+  }
 }
 
-export default App;
+export default subscribeTo(App, ['loading']);
